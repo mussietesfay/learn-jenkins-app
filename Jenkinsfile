@@ -32,8 +32,8 @@ pipeline {
 
             steps{
                 sh'''
-                  test -f build/index.html
-                  npm test -- --reporters=jest-junit
+                   test -f build/index.html || { echo "Build failed: index.html not found"; exit 1; }
+                  npm test
                 '''
             }
         }

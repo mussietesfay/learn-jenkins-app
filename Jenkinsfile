@@ -52,13 +52,12 @@ pipeline {
 
             steps {
                 sh'''
-                  npm install -g netlify-cli
-
-                  node_modules/.bin/netlify --version
-
-                  node_modules/.bin/netlify status
-
-                  node_modules/.bin/netlify deploy --dir=build --prod
+                  
+                  npm install netlify-cli --save-dev
+                  npx netlify --version
+                  npx netlify status
+                  npx netlify deploy --dir=build --prod
+                  
 
                 '''
             }

@@ -10,7 +10,7 @@ pipeline {
         stage('build') {
              agent{
                  docker{
-                    image 'node:22-alpine'
+                    image 'node:22'
                     reuseNode true
                  }
              }
@@ -30,7 +30,7 @@ pipeline {
 
             agent{
                 docker{
-                    image 'node:22-alpine'
+                    image 'node:22'
                     reuseNode true
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
         stage('deploy') {
              agent{
                  docker{
-                    image 'node:22-alpine'
+                    image 'node:22'
                     reuseNode true
                  }
              }
@@ -53,10 +53,10 @@ pipeline {
             steps {
                 sh'''
                   
-                  npm install netlify-cli --save-dev
+                  npm install netlify-cli --save-dev || { echo "Netlify CLI installation failed"; exit 1; }
                   npx netlify --version
                   npx netlify status
-                  npx netlify deploy --dir=build --prod
+                  npx netlify deploy --dir=build --prod || { echo "Deployment failed"; exit 1; }
                   
 
                 '''

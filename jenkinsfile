@@ -4,10 +4,8 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                sh 'echo "hello jenkins"'
-                sh 'whoami'
+                echo 'Hello World'
             }
         }
     }
 }
-
